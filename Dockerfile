@@ -5,7 +5,8 @@ WORKDIR /app
 # Copiar archivos de configuración de Gradle para aprovechar la caché de capas Docker
 COPY gradlew .
 COPY gradle gradle
-COPY build.gradle settings.gradle gradle.properties ./
+COPY build.gradle settings.gradle ./
+RUN touch gradle.properties
 RUN chmod +x gradlew && ./gradlew dependencies --no-daemon || true
 
 # Copiar el código fuente y compilar el JAR ejecutable excluyendo tests para acelerar el despliegue
